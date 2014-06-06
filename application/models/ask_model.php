@@ -35,14 +35,14 @@ function client_sum(){
 }
 function employeedep_fetch(){
 	
-	return $this->db->query("SELECT * FROM `users` u inner join `departments` d on u.`user_dep`=d.`dep_id` where u.`active`='1' order by d.`dep_id`");
+	return $this->db->query("SELECT * FROM `departments` d where d.`is_deleted`='0'");
 //return $this->db->query("SELECT d.`dep_id`, GROUP_CONCAT(users.`first_name`)
 //FROM  `departments` d inner JOIN users
 //ON(d.`dep_id`=users.`user_dep`) GROUP BY d.`dep_id`");
 
 }
 function task_fetch(){
-	return $this->db->query("SELECT * FROM `tasks` t inner join `users` u on t.`assigned`=u.`id` inner join `clients` c on t.`client`=c.`client_id` where t.`is_deleted`='0' and c.`is_deleted`='0' and u.`active`='1' ");
+	return $this->db->query("SELECT * FROM `tasks` t inner join `departments` d on t.`assigned`=d.`dep_id` inner join `clients` c on t.`client`=c.`client_id` where t.`is_deleted`='0' and c.`is_deleted`='0' and d.`is_deleted`='0' ");
 
 }
 

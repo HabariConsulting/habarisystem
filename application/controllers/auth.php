@@ -1120,7 +1120,7 @@ function delete_client($id){
                 $data['info']=$query;
             }
         $this->load->model('ask_model');
-        $data['client_fetch']= $this->ask_model->client_fetch();
+        $data['job_fetch']= $this->ask_model->job_fetch();
         $data['employeedep_fetch']= $this->ask_model->employeedep_fetch();        
         $data['page_location']='Task';	
 		$data['content']='new_task';

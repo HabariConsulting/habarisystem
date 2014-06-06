@@ -45,7 +45,7 @@
 											<td><a href="<?php echo site_url();?>/auth/view_task/<?php echo $row->task_id; ?>"><?php echo $row->title; ?></a></td>
 											<td class="hidden-480"><?php echo $row->name; ?></a></td>
 											<td class="hidden-480"><?php echo $row->deadline; ?></td>
-											<td class="hidden-480"><?php echo $row->username; ?></td>
+											<td class="hidden-480"><?php echo $row->dep_name; ?></td>
 											<td class="center hidden-480"><?php if($row->is_active==1){?>
 												<a href="<?php echo site_url();?>/auth/inactivate_task/<?php echo $row->task_id; ?>"><span class="label label-success">In Progress</span></a><?php }?>
 												<?php if($row->is_active==2){?>

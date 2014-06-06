@@ -26,14 +26,14 @@
                               </div>
                            </div> 
                            <div class="control-group">
-                              <label class="control-label">Client: <span class="required">*</span></label>
+                              <label class="control-label">Attach to a Job: <span class="required">*</span></label>
                               <div class="controls">
-                                 <select name="selCSI" data-placeholder="Select Client from Database" class="chosen-with-diselect span6" tabindex="-1" id="selCSI">
+                                 <select name="selCSI" data-placeholder="Select Job Number from Database" class="chosen-with-diselect span6" tabindex="-1" id="selCSI">
                                     <option value=""></option>
                                     <?php
                            
-                            foreach ($client_fetch->result() as $row) { ?>
-                                    <option value="<?php echo $row->client_id; ?>"><?php echo $row->name; ?></option><?php }?>
+                            foreach ($job_fetch->result() as $row) { ?>
+                                    <option value="<?php echo $row->client_id; ?>"><?php echo $row->job_number; ?></option><?php }?>
                                     
                                  </select>
                               </div>
@@ -46,17 +46,18 @@
                               </div>
                            </div>
                             <div class="control-group">
-                              <label class="control-label">Assigned To:<span class="required">*</span> </label>
+                              <label class="control-label">Assigned Department:<span class="required">*</span> </label>
                               <div class="controls">
-                                 <select name="employee" id="employee" data-placeholder="Select who to assign task to" class="chosen span6" multiple="multiple" tabindex="6">
+                                 <select name="employee" id="employee" data-placeholder="Select who to assign task to" class="chosen-with-diselect span6" tabindex="-1">
                                     <option value=""></option>
                                     <?php
                            
                             foreach ($employeedep_fetch->result() as $row) { ?>
-                                    <optgroup label="<?php echo $row->dep_name; ?> Department">
+                            <option value="<?php echo $row->dep_id; ?>"><?php echo $row->dep_name; ?></option><?php }?>
+                                    <!--<optgroup label="<?php echo $row->dep_name; ?> Department">
                                        <option value="<?php echo $row->id; ?>"><?php echo $row->first_name; ?></option>                                       
-                                    </optgroup>
-                                    <?php }?>
+                                    </optgroup>-->
+                                    
                                    </select>
                               </div>
                            </div>
