@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/habari_time/';
+$config['base_url']	= 'http://localhost/habarisystem/';
 
 /*
 |--------------------------------------------------------------------------
