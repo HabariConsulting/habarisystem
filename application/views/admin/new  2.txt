@@ -1,0 +1,114 @@
+public function publish_project($pubid)
+    {
+        $this->load->model('project_model');
+        $QUERY= $this->project_model->publish_project($pubid);
+
+        $data= array();
+        $this->load->model('project_model');
+            if($query=$this->project_model->get_recordsthree()){
+                $data['recordsthree']=$query;
+            }        
+       
+        $data["content"]='projects';
+        $this->load->view('includes/admin_template',$data);
+        
+    
+    }
+    public function unpublish_project($pubid)
+    {
+        $this->load->model('project_model');
+        $QUERY= $this->project_model->unpublish_project($pubid);
+
+        $data= array();
+        $this->load->model('project_model');
+            if($query=$this->project_model->get_recordsthree()){
+                $data['recordsthree']=$query;
+            }
+
+       
+        $data["content"]='projects';
+        $this->load->view('includes/admin_template',$data);
+        
+    
+    }
+
+Model.........................
+ function publish_project($pubid){
+  $sql = "UPDATE project
+    SET is_published=1 
+    WHERE pid=".$pubid;
+  
+  $query = $this->db->query($sql);
+  
+  if ($query){
+   return 0;
+  }
+  else{
+   return 1;
+  }
+ }
+ function unpublish_project($pubid){
+  $sql = "UPDATE project
+    SET is_published=0 
+    WHERE pid=".$pubid;
+  
+  $query = $this->db->query($sql);
+  
+  if ($query){
+   return 0;
+  }
+  else{
+   return 1;
+  }
+ }
+ 
+ 
+ <table class="table table-striped table-bordered table-advance table-hover">
+	<thead>
+		<tr>
+			<th><i class="icon-briefcase"></i> Title</th>
+			<th class="hidden-phone"><i class="icon-question-sign"></i> Action</th>			
+		</tr>
+	</thead>
+	<tbody>	
+
+	<?php
+	$count = count($post['id']);
+	for ($i=0;$i<$count;$i++) 
+	{?>	
+		<tr>
+			<td>
+				<a href="#">
+					<?php echo $post['title'][$i];?>
+				</a>
+			</td>
+			<td>
+				<a class="btn mini blue-stripe" href="<?php echo base_url().'index.php/Blog/edit/'.$post['id'][$i]?>" > Edit</a>				
+				<a class="btn mini green-stripe"> <?php echo anchor('Blog/edit/'.$post['id'][$i],' [Publish]'); ?> </a>
+				<a class="btn mini red-stripe"><?php echo anchor('Blog/edit/'.$post['id'][$i],' [Unpublish]'); ?></a>				
+			</td>
+		</tr>
+	<?php } ?>
+	</tbody>
+</table>
+
+
+
+	<?php
+	$count = count($post['id']);
+	for ($i=0;$i<$count;$i++) 
+	{?>
+	
+		<tr>
+			<td>
+				<a href="#">
+					<?php echo $post['title'][$i]; ?>
+				</a>
+			</td>
+			<td>
+				<a class="btn mini blue-stripe" href="<?php echo base_url().'index.php/Blog/edit/'.$post['id'][$i]?>" > Edit</a>				
+				<a class="btn mini green-stripe"> <?php echo anchor('Blog/publish_post/'.$post['id'][$i],' [Publish]'); ?> </a>
+				<a class="btn mini red-stripe"><?php echo anchor('Blog/unpublish_post/'.$post['id'][$i],' [Unpublish]'); ?></a>
+			</td>
+		</tr>
+	<?php } ?>
