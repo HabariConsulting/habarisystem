@@ -1243,10 +1243,11 @@ function view_task($id){
 		
 		
 			$this->load->model('ask_model');
-        $data['client_fetch']= $this->ask_model->client_fetch();
+        $data['job_fetch']= $this->ask_model->get_job($id);
+         $data['client_fetch']= $this->ask_model->client_fetch();
         //$data['employeedep_fetch']= $this->ask_model->employeedep_fetch();	
-        $data['view_task'] = $this->ask_model->view_task($id);		
-			$data['page_location']='Task';	
+        //$data['view_task'] = $this->ask_model->view_task($id);		
+			$data['page_location']='Jobs';	
 			$data['content']='view_job';
  			$data['page_title']='Habari Consulting Task';
 			$data['page_sub_title']='view';
@@ -1258,10 +1259,20 @@ function view_task($id){
 			$query = $this->ask_model->edit_task($id);
 			redirect('auth/view_tasks');
 		}
+	function edit_job($id){
+			$this->load->model('ask_model');
+			$query = $this->ask_model->edit_job($id);
+			redirect('auth/view_jobs');
+		}
 	function delete_task($id){
 			$this->load->model('ask_model');
 			$query = $this->ask_model->delete_task($id);
 			redirect('auth/view_tasks');
+		}
+	function delete_job($id){
+			$this->load->model('ask_model');
+			$query = $this->ask_model->delete_job($id);
+			redirect('auth/view_jobs');
 		}
 	function activate_task($id){
 			$this->load->model('ask_model');

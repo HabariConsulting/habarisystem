@@ -3,7 +3,7 @@
                   <!-- BEGIN EXTRAS PORTLET-->
                   <div class="portlet box blue">
                      <div class="portlet-title">
-                        <h4><i class="icon-reorder"></i>New Job</h4>
+                        <h4><i class="icon-reorder"></i><?php echo $job_fetch['name'];?> : <?php echo $job_fetch['job_number'];?></h4>
                         <div class="tools">
                            
                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -13,12 +13,12 @@
                      </div>
                      <div class="portlet-body form">
                         <!-- BEGIN FORM-->
-                        <form action="<?php echo site_url();?>/auth/save_job" class="form-horizontal" name="form" method="post" enctype="multipart/form-data">
+                        <form action="<?php echo site_url();?>/auth/edit_job/<?php echo $job_fetch['job_id'];?>" class="form-horizontal" name="form" method="post" enctype="multipart/form-data">
                            
                            <div class="control-group">
                               <label class="control-label">Job Number:<span class="required">*</span></label>
                               <div class="controls">
-                                 <input type="text" name="job_number" id="job_number" data-required="1" class="span6 m-wrap" value="<?php echo $client_fetch['job_number'];?>" />
+                                 <input type="text" name="job_number" id="job_number" data-required="1" class="span6 m-wrap" value="<?php echo $job_fetch['job_number'];?>" />
                                  
                               </div>
                            </div> 
@@ -26,7 +26,7 @@
                               <label class="control-label">Client: <span class="required">*</span></label>
                               <div class="controls">
                                  <select name="selCSI" data-placeholder="Select Client from Database" class="chosen-with-diselect span6" tabindex="-1" id="selCSI">
-                                    <option selected value="<?php echo $client_fetch['dep_id'];?>"><?php echo $client_fetch['dep_name'];?></option
+                                    <option selected value="<?php echo $job_fetch['client_id'];?>"><?php echo $job_fetch['name'];?></option
                                     <?php
                            
                             foreach ($client_fetch->result() as $row) { ?>
@@ -38,13 +38,13 @@
                            <div class="control-group">
                               <label class="control-label">Description:<span class="required">*</span></label>
                               <div class="controls">
-                                 <textarea class="span12 ckeditor m-wrap" name="editor1" id="editor1" rows="6"><?php echo $client_fetch['description'];?></textarea>
+                                 <textarea class="span12 ckeditor m-wrap" name="editor1" id="editor1" rows="6"><?php echo $job_fetch['description'];?></textarea>
                               </div>
                            </div>
                            <div class="control-group">
                               <label class="control-label">Timeline:<span class="required">*</span></label>
                               <div class="controls">
-                                 <input type="text" name="timeline" id="timeline" data-required="1" class="span6 m-wrap" value="<?php echo $client_fetch['timeline'];?>" />
+                                 <input type="text" name="timeline" id="timeline" data-required="1" class="span6 m-wrap" value="<?php echo $job_fetch['timeline'];?>" />
                                  
                               </div>
                            </div>
@@ -65,14 +65,14 @@
                            <div class="control-group">
                               <label class="control-label">Category if Non-retainer:</label>
                               <div class="controls">
-                                 <input type="text" name="category" id="category" data-required="1" class="span6 m-wrap" value="<?php echo $client_fetch['category'];?>" />
+                                 <input type="text" name="category" id="category" data-required="1" class="span6 m-wrap" value="<?php echo $job_fetch['category'];?>" />
                                  
                               </div>
                            </div>  
                            <div class="control-group">
                               <label class="control-label">Quote:<span class="required">*</span></label>
                               <div class="controls">
-                                 <input type="text" name="quote" id="quote" data-required="1" class="span6 m-wrap" value="<?php echo $client_fetch['quote'];?>" />
+                                 <input type="text" name="quote" id="quote" data-required="1" class="span6 m-wrap" value="<?php echo $job_fetch['quote'];?>" />
                                  
                               </div>
                            </div>  
@@ -80,8 +80,8 @@
                           
                            
                            <div class="form-actions">
-                              <button type="submit" class="btn blue">Save Job</button>
-                              <a href="<?php echo site_url();?>/auth/departments"><button type="button" class="btn">Cancel</button></a>
+                              <button type="submit" class="btn blue">Edit Job</button>
+                              <a href="<?php echo site_url();?>/auth/view_jobs"><button type="button" class="btn">Cancel</button></a>
                            </div>
                         </form>
                         <!-- END FORM-->

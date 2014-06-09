@@ -199,6 +199,20 @@ function delete_task($id){
 			return 1;
 		}	
 }
+function delete_job($id){
+		$sql = "UPDATE jobs
+				SET is_deleted=1 
+				WHERE job_id=".$id;
+		
+		$query = $this->db->query($sql);
+		
+		if ($query){
+			return 0;
+		}
+		else{
+			return 1;
+		}	
+}
 function inactivate_dep($id){
 		$sql = "UPDATE departments
 				SET is_active=1 
@@ -250,6 +264,17 @@ function edit_task($id){
 		$query = $this->db->query($sql);		
 		
 }
+function edit_job($id){
+		$sql = "UPDATE jobs		
+				SET job_number = '{$this->input->post('job_number')}', description = '{$this->input->post('editor1')}',
+				 client_id = '{$this->input->post('selCSI')}', timeline = '{$this->input->post('timeline')}',
+				  retainer = '{$this->input->post('optionsRadios1')}', category = '{$this->input->post('category')}',
+				   quote = '{$this->input->post('quote')}'
+				WHERE job_id=".$id;
+		
+		$query = $this->db->query($sql);		
+		
+}
 function view_dep($id){
 	return mysql_fetch_assoc(mysql_query("SELECT * FROM `departments` where dep_id='$id' order by dep_id desc limit 1" ));
 }
@@ -258,6 +283,10 @@ function view_client($id){
 }
 function view_task($id){
 	return mysql_fetch_assoc(mysql_query("SELECT * FROM `tasks` t inner join `departments` d on t.`assigned`=d.`dep_id` inner join `jobs` j on t.`client`=j.`job_id` where t.`task_id`='$id' order by t.`task_id` desc limit 1" ));
+}
+function get_job($id){
+	return mysql_fetch_assoc(mysql_query("SELECT * FROM `jobs` j inner join `clients` c on j.`client_id`=c.`client_id` where j.`job_id`='$id' order by j.`dated` desc limit 1"));
+
 }
 
 
