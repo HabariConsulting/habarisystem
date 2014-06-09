@@ -29,7 +29,7 @@
 										<tr>
 											<th style="width:8px;"></th>
 											<th>Title</th>
-											<th class="hidden-480">Client</th>
+											<th class="hidden-480">Job</th>
 											<th class="hidden-480">Deadline</th>
 											<th class="hidden-480">Assigned To</th>
 											<th class="hidden-480">Status</th>
@@ -43,7 +43,7 @@
 										<tr class="odd gradeX">
 											<td><?php echo $num;?></td>
 											<td><a href="<?php echo site_url();?>/auth/view_task/<?php echo $row->task_id; ?>"><?php echo $row->title; ?></a></td>
-											<td class="hidden-480"><?php echo $row->name; ?></a></td>
+											<td class="hidden-480"><?php echo $row->job_number; ?></a></td>
 											<td class="hidden-480"><?php echo $row->deadline; ?></td>
 											<td class="hidden-480"><?php echo $row->dep_name; ?></td>
 											<td class="center hidden-480"><?php if($row->is_active==1){?>

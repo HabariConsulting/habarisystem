@@ -18,19 +18,24 @@ function department_fetch(){
 
 }
 function client_fetch(){
-	return $this->db->query("SELECT * FROM `clients` where is_deleted='0' ");
+	return $this->db->query("SELECT * FROM `clients` where is_deleted='0' order by dated desc ");
 
 }
 function job_fetch(){
-	return $this->db->query("SELECT * FROM `jobs` j inner join `clients` c on j.`client_id`=c.`client_id` where j.`is_deleted`='0' ");
+	return $this->db->query("SELECT * FROM `jobs` j inner join `clients` c on j.`client_id`=c.`client_id` where j.`is_deleted`='0' order by j.`dated` desc");
 
 }
 function sheet_fetch(){
-	return $this->db->query("SELECT * FROM `sheets` s inner join `users` u on s.`posted_by`=u.`email` inner join `tasks` t on s.`task_id`=t.`task_id` inner join `clients` c on t.`client`=c.`client_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and c.`is_deleted`='0' ");
+	return $this->db->query("SELECT * FROM `sheets` s inner join `users` u on s.`posted_by`=u.`email` inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' order by s.`dated` desc ");
 
 }
 function client_sum(){
 	return $this->db->query("SELECT, c.`client_id` SUM(s.`hours`) as hours FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `clients` c on t.`client`=c.`client_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and c.`is_deleted`='0' group by c.`client_id`");
+
+}
+function jobsum_fetch(){
+	return $this->db->query("SELECT s.`task_id` , SUM(s.`hours`) as hours FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by s.`task_id`");
+	//return $this->db->query("SELECT * FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_id`");
 
 }
 function employeedep_fetch(){
@@ -42,12 +47,12 @@ function employeedep_fetch(){
 
 }
 function task_fetch(){
-	return $this->db->query("SELECT * FROM `tasks` t inner join `departments` d on t.`assigned`=d.`dep_id` inner join `clients` c on t.`client`=c.`client_id` where t.`is_deleted`='0' and c.`is_deleted`='0' and d.`is_deleted`='0' ");
+	return $this->db->query("SELECT * FROM `tasks` t inner join `departments` d on t.`assigned`=d.`dep_id` inner join `jobs` j on t.`client`=j.`job_id` where t.`is_deleted`='0' and j.`is_deleted`='0' and d.`is_deleted`='0' order by t.`date_submitted` desc");
 
 }
 
 function task_user($user_id){
-	return $this->db->query("SELECT * FROM `tasks` t inner join `clients` c on t.`client`=c.`client_id` where t.`is_deleted`='0' and c.`is_deleted`='0' and t.`is_active` NOT LIKE '2' and t.`assigned`= $user_id");
+	return $this->db->query("SELECT * FROM `tasks` t inner join `jobs` j on t.`client`=j.`job_id` inner join `departments` d on t.`assigned`=d.`dep_id` left join `users` u on d.`dep_id`=u.`user_dep` where t.`is_deleted`='0' and j.`is_deleted`='0' and t.`is_active` NOT LIKE '2' and t.`assigned`=d.`dep_id` and u.`id`= $user_id");
 	
 }
 function dep_user($user_id){
@@ -252,7 +257,7 @@ function view_client($id){
 	return mysql_fetch_assoc(mysql_query("SELECT * FROM `clients` where client_id='$id' order by client_id desc limit 1" ));
 }
 function view_task($id){
-	return mysql_fetch_assoc(mysql_query("SELECT * FROM `tasks` t inner join `users` u on t.`assigned`=u.`id` inner join `clients` c on t.`client`=c.`client_id` where t.`task_id`='$id' order by t.`task_id` desc limit 1" ));
+	return mysql_fetch_assoc(mysql_query("SELECT * FROM `tasks` t inner join `departments` d on t.`assigned`=d.`dep_id` inner join `jobs` j on t.`client`=j.`job_id` where t.`task_id`='$id' order by t.`task_id` desc limit 1" ));
 }
 
 

@@ -3,7 +3,7 @@
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 						<div class="portlet box grey">
 							<div class="portlet-title">
-								<h4><i class="icon-user"></i>Per Client</h4>
+								<h4><i class="icon-user"></i>Jobs</h4>
 								<div class="actions">
 									
 									<div class="btn-group">										
@@ -16,19 +16,22 @@
 									<thead>
 										<tr>
 											<th style="width:8px;"></th>
-											<th>Client</th>
+											<th>Job</th>
 											<th class="hidden-480">Hours</th>
 											<th class="hidden-480"></th>
 										</tr>
 									</thead>
 									<tbody>
-										
+										<?php $num=1;
+									
+									 foreach ($jobsum_fetch->result() as $row) { ?>
 										<tr class="odd gradeX">
-											<td></td>
-											<td>shuxer</td>
-											<td class="hidden-480"><a href="mailto:shuxer@gmail.com">shuxer@gmail.com</a></td>
+											<td><?php echo $num;?></td>
+											<td><?php echo $row->job_number; ?></td>
+											<td class="hidden-480"><?php echo $row->hours;?></td>
 											<td><span class="label label-success">Reset</span></td>
-										</tr>
+										</tr><?php $num++;}
+										  ?>
 									</tbody>
 								</table>
 							</div>
@@ -51,7 +54,7 @@
 										<tr>
 											<th style="width:8px;"></th>
 											<th>Employee</th>
-											<th class="hidden-480">Client</th>
+											<th class="hidden-480">Task</th>
 											<th class="hidden-480">Hours</th>
 											<th class="hidden-480">Dated</th>
 										</tr>
@@ -63,7 +66,7 @@
 										<tr class="odd gradeX">
 											<td><?php echo $num;?></td>
 											<td><?php echo $row->first_name; ?></td>
-											<td class="hidden-480"><?php echo $row->name; ?></td>
+											<td class="hidden-480"><?php echo $row->job_number; ?></td>
 											<td><?php echo $row->hours; ?></td>
 											<td class="hidden-480"><?php echo $row->dated; ?></td>
 										</tr><?php $num++;}

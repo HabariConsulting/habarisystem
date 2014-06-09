@@ -1219,7 +1219,7 @@ function view_task($id){
 		
 		
 			$this->load->model('ask_model');
-        $data['client_fetch']= $this->ask_model->client_fetch();
+        $data['job_fetch']= $this->ask_model->job_fetch();
         $data['employeedep_fetch']= $this->ask_model->employeedep_fetch();	
         $data['view_task'] = $this->ask_model->view_task($id);		
 			$data['page_location']='Task';	
@@ -1228,6 +1228,31 @@ function view_task($id){
 			$data['page_sub_title']='view';
 			$this->load->view('includes/template',$data);
 		}
+	function view_job($id){
+	if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		$data= array();
+		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
+		$this->load->model('ion_auth_model');
+            if($query=$this->ion_auth_model->data_info($identity)){
+                $data['info']=$query;
+            }
+		
+		
+			$this->load->model('ask_model');
+        $data['client_fetch']= $this->ask_model->client_fetch();
+        //$data['employeedep_fetch']= $this->ask_model->employeedep_fetch();	
+        $data['view_task'] = $this->ask_model->view_task($id);		
+			$data['page_location']='Task';	
+			$data['content']='view_job';
+ 			$data['page_title']='Habari Consulting Task';
+			$data['page_sub_title']='view';
+			$this->load->view('includes/template',$data);
+		}
+
 	function edit_task($id){
 			$this->load->model('ask_model');
 			$query = $this->ask_model->edit_task($id);
@@ -1313,6 +1338,7 @@ function view_task($id){
             }
         $this->load->model('ask_model');
 		$data['sheet_fetch']= $this->ask_model->sheet_fetch();
+		$data['jobsum_fetch']= $this->ask_model->jobsum_fetch();
 		//$data['client_sum']= $this->ask_model->client_sum();
         $data['page_location']='Timesheet';	
 		$data['content']='timesheets';

@@ -33,7 +33,7 @@
                                     <?php
                            
                             foreach ($job_fetch->result() as $row) { ?>
-                                    <option value="<?php echo $row->client_id; ?>"><?php echo $row->job_number; ?></option><?php }?>
+                                    <option value="<?php echo $row->job_id; ?>"><?php echo $row->job_number; ?></option><?php }?>
                                     
                                  </select>
                               </div>
@@ -48,7 +48,7 @@
                             <div class="control-group">
                               <label class="control-label">Assigned Department:<span class="required">*</span> </label>
                               <div class="controls">
-                                 <select name="employee" id="employee" data-placeholder="Select who to assign task to" class="chosen-with-diselect span6" tabindex="-1">
+                                 <select name="employee" id="employee" data-placeholder="Select Department" class="chosen-with-diselect span6" tabindex="-1">
                                     <option value=""></option>
                                     <?php
                            
