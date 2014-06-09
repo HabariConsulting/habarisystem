@@ -34,7 +34,7 @@ function client_sum(){
 
 }
 function jobsum_fetch(){
-	return $this->db->query("SELECT s.`task_id` , SUM(s.`hours`) as hours FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by s.`task_id`");
+	return $this->db->query("SELECT s.`task_id` , j.`job_number` as job_number, SUM(s.`hours`) as hours FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_number`");
 	//return $this->db->query("SELECT * FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_id`");
 
 }

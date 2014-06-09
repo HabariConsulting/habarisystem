@@ -66,7 +66,7 @@
 										<tr class="odd gradeX">
 											<td><?php echo $num;?></td>
 											<td><?php echo $row->first_name; ?></td>
-											<td class="hidden-480"><?php echo $row->job_number; ?></td>
+											<td class="hidden-480"><?php echo $row->title; ?></td>
 											<td><?php echo $row->hours; ?></td>
 											<td class="hidden-480"><?php echo $row->dated; ?></td>
 										</tr><?php $num++;}
