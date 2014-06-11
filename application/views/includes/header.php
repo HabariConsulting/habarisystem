@@ -32,6 +32,7 @@
    <link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
    <link rel="stylesheet" href="<?php echo base_url();?>assets/data-tables/DT_bootstrap.css" />
    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bootstrap-daterangepicker/daterangepicker.css" />
+   <link href='http://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
    <!--<link rel="shortcut icon" href="<?php echo base_url();?>assets/img/favicon.ico" /> -->
 
 </head>
@@ -131,6 +132,20 @@
 					<span class="selected"></span>
                     <?php }?>
 					</a>
+				</li>
+				<li  <?php if ($page_location=='Quotes'){?>
+					class="start active"
+                    <?php }else{?>class="has-sub "<?php }?>>
+					<a href="javascript:;">
+					<i class="icon-user"></i> 
+					<span class="title">Quotes</span>
+					<span class="arrow "></span>
+					</a>
+					<ul class="sub">
+						<li><a href="<?php echo site_url();?>/quote/new_quote">New Quote</a></li>
+						<li><a href="<?php echo site_url();?>/quote/view_quote">View Quote</a></li>
+						 
+					</ul>					
 				</li>
 				<li  <?php if ($page_location=='Clients'){?>
 					class="start active"
