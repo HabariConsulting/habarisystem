@@ -24,6 +24,7 @@ class Quote extends CI_Controller {
 
 		$this->lang->load('auth');
 		$this->load->helper('language');
+		$this->load->helper('date');
 	}
 
 	//redirect if needed, otherwise display the user list...go back and code this eugene
@@ -64,6 +65,28 @@ class Quote extends CI_Controller {
 		$data['content']='view_quote';
 		$data['page_title']='Habari Quotes';
 		$data['page_sub_title']='View Quote';
+		$this->load->view('includes/template',$data);
+
+	}
+	function report($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		$data= array();
+		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
+		$this->load->model('ion_auth_model');
+            if($query=$this->ion_auth_model->data_info($identity)){
+                $data['info']=$query;
+            }//$this->session_manager();
+        $data['jobsum_report']= $this->ask_model->jobsum_report($id);
+        $data['tasksum_report']= $this->ask_model->tasksum_report($id);
+        $data['sumtotal_report']= $this->ask_model->sumtotal_report($id);
+        $data['page_location']='Quotes';	
+		$data['content']='report';
+		$data['page_title']='Habari Report';
+		$data['page_sub_title']='View Report';
 		$this->load->view('includes/template',$data);
 
 	}

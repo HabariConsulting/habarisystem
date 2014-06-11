@@ -18,6 +18,7 @@
 	<link href="<?php echo base_url();?>assets/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
 	<link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet" />
 	<link href="<?php echo base_url();?>assets/css/style_responsive.css" rel="stylesheet" />
+	<link href="<?php echo base_url();?>assets/css/style_default.css" rel="stylesheet" id="style_color" />
 <link href="<?php echo base_url();?>assets/css/style_light.css" rel="stylesheet" id="style_color" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/chosen-bootstrap/chosen/chosen.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/uniform/css/uniform.default.css" />
@@ -143,7 +144,7 @@
 					</a>
 					<ul class="sub">
 						<li><a href="<?php echo site_url();?>/quote/new_quote">New Quote</a></li>
-						<li><a href="<?php echo site_url();?>/quote/view_quote">View Quote</a></li>
+						<li><a href="<?php echo site_url();?>/auth/view_jobs">View Quote</a></li>
 						 
 					</ul>					
 				</li>

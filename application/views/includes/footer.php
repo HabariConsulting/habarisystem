@@ -55,6 +55,9 @@
 	<script src="<?php echo base_url();?>assets/js/excanvas.js"></script>
 	<script src="<?php echo base_url();?>assets/js/respond.js"></script>
 	<![endif]-->
+	<script src="<?php echo base_url();?>assets/jquery-knob/js/jquery.knob.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/gritter/js/jquery.gritter.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.pulsate.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/data-tables/DT_bootstrap.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/app.js"></script>		
@@ -63,10 +66,11 @@
 		jQuery(document).ready(function() {			
 			// initiate layout and plugins
 			App.setPage("table_managed");
+			App.setPage("sliders");
 			App.init();
 		});
 	</script>
-  
+	
  </body>
 <!-- END BODY -->
 </html>

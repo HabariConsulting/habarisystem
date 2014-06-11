@@ -29,9 +29,8 @@
 											<td><?php echo $num;?></td>
 											<td><?php echo $row->job_number; ?></td>
 											<td class="hidden-480"><?php echo $row->hours;?></td>
-											<td><span class="label label-success">Reset</span></td>
-										</tr><?php $num++;}
-										  ?>
+											<td><a href="<?php echo site_url();?>/quote/report/<?php echo $row->job_id; ?>"><span class="label label-success">Get Report</span></a></td>
+										</tr><?php $num++;}?>
 									</tbody>
 								</table>
 							</div>

@@ -34,10 +34,11 @@ function client_sum(){
 
 }
 function jobsum_fetch(){
-	return $this->db->query("SELECT s.`task_id` , j.`job_number` as job_number, SUM(s.`hours`) as hours FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_number`");
+	return $this->db->query("SELECT s.`task_id` , j.`job_number` as job_number, j.`job_id` as job_id, SUM(s.`hours`) as hours FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_number`");
 	//return $this->db->query("SELECT * FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_id`");
 
 }
+
 function employeedep_fetch(){
 	
 	return $this->db->query("SELECT * FROM `departments` d where d.`is_deleted`='0'");
@@ -288,6 +289,47 @@ function get_job($id){
 	return mysql_fetch_assoc(mysql_query("SELECT * FROM `jobs` j inner join `clients` c on j.`client_id`=c.`client_id` where j.`job_id`='$id' order by j.`dated` desc limit 1"));
 
 }
+function jobsum_report($id){
+	return mysql_fetch_assoc(mysql_query("SELECT s.`task_id` , j.`job_number` as job_number,
+															 j.`job_id` as job_id,
+															 j.`quote` as quote,
+															 c.`name` as name,
+															 c.`contact_person` as contact_person,
+															 c.`p_number` as phone_number,
+															 c.`email` as company_email,
+															 c.`address` as company_address,
+															 j.`description` as description,
+															 SUM(s.`hours`) as hours
+										 FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id`
+										  inner join `jobs` j  on t.`client`=j.`job_id`
+										  inner join `clients` c on j.`client_id`=c.`client_id`
+										   where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' and j.`job_id`='$id' group by j.`job_number` desc limit 1"));
+	//return $this->db->query("SELECT * FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_id`");
+
+}
+function tasksum_report($id){
+	return $this->db->query("SELECT s.`task_id` , t.`title` as title,
+															 d.`rate` as rate,															 t.`brief` as brief,
+															 SUM(s.`hours`) as hours
+										 FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id`
+										 inner join `departments` d on t.`assigned`=d.`dep_id`
+										  inner join `jobs` j  on t.`client`=j.`job_id`
+										  inner join `clients` c on j.`client_id`=c.`client_id`
+										   where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' and j.`job_id`='$id' group by t.`task_id`");
+	//return $this->db->query("SELECT * FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_id`");
+
+}
+function sumtotal_report($id){
+	return $this->db->query("SELECT (d.`rate` * SUM(s.`hours`)) as total_cost
+										 FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id`
+										 inner join `departments` d on t.`assigned`=d.`dep_id`
+										  inner join `jobs` j  on t.`client`=j.`job_id`
+										  inner join `clients` c on j.`client_id`=c.`client_id`
+										   where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' and j.`job_id`='$id' group by t.`task_id`");
+	//return $this->db->query("SELECT * FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_id`");
+
+}
+
 
 
 }

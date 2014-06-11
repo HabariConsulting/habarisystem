@@ -22,6 +22,7 @@ class Auth extends CI_Controller {
 
 		$this->lang->load('auth');
 		$this->load->helper('language');
+		$this->load->helper('date');
 	}
 
 	//redirect if needed, otherwise display the user list...go back and code this eugene
