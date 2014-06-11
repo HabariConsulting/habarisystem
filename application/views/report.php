@@ -88,34 +88,49 @@
 									<strong>Analysis</strong><br />
 									<div class="circle-stat block">
 											<div class="visual">
-												<input class="knobify" data-width="115" data-fgcolor="#A4CD39" data-thickness=".2" data-skin="tron" data-displayprevious="true" value="+58" data-max="100" data-min="0" />
+												<input class="knobify" data-width="100" data-fgcolor="#A4CD39" data-thickness=".2" data-skin="tron" data-displayprevious="true" value="
+												<?php 									
+									 $sum = 0;
+									 foreach ($tasksum_report->result() as $row) {
+									$total = $row->rate * $row->hours;
+									$array  = array_map('intval', str_split($row->rate * $row->hours));
+									$sum += intval($total);
+									//var_dump($total);
+
+									
+									//echo array_sum($a);
+								}
+								//echo $sum;
+								?> 
+											<?php
+												$chart = $sum / $jobsum_report['quote'] * 100;
+												echo $chart;
+											 ?>
+												" data-max="100" data-min="0" />
 											</div>
 											<div class="details">
 												<div class="title">Profit <i class="icon-caret-up"></i></div>
-												<div class="number">1120.32$</div>
-												<span class="label label-success"><i class="icon-comment"></i> 453</span>
-												<span class="label label-inverse"><i class="icon-globe"></i> 123</span>
+												<div class="number"><?php
+												$profit = $jobsum_report['quote'] - $sum;
+												echo $profit;
+											 ?></div>
+												<span class="label label-success"><i class="icon-comment"></i> </span>
+												<span class="label label-inverse"><i class="icon-globe"></i> </span>
 											</div>
 										</div>
 								</address>
 							</div>
 						</div>
+						
+												
+												
 						<div class="span8 invoice-block">
 							<ul class="unstyled">
 								<li><strong>Sub - Total amount:</strong> -----</li>
 								<li><strong>Discount:</strong> -----</li>
 								<li><strong>VAT:</strong> -----</li>
-								<?php 									
-									 foreach ($tasksum_report->result() as $row) { 
-									$total = $row->rate * $row->hours;
-									//$array  = array_map('intval', str_split($total));
-									var_dump($total);
-
-									//$a= array_sum(str_split($total));
-									//echo array_sum($a);
-								}?> 
-								<li><strong>Grand Total (KES) :</strong><?php $sum = array_sum(str_split($total));
-									var_dump($sum);?></li>
+								
+								<li><strong>Grand Total (KES) : </strong><?php echo $sum;?></li>
 								 
 							</ul>
 							<br />
@@ -124,4 +139,6 @@
 					</div>
 				</div>
 				<!-- END PAGE CONTENT-->
+
+				
 				

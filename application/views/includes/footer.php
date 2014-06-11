@@ -61,15 +61,25 @@
 	<script type="text/javascript" src="<?php echo base_url();?>assets/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/data-tables/DT_bootstrap.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/app.js"></script>		
-	
+	<?php if ($page_location=='Quotes'){?>
 	<script>
 		jQuery(document).ready(function() {			
 			// initiate layout and plugins
-			App.setPage("table_managed");
+			//App.setPage("table_managed");
 			App.setPage("sliders");
 			App.init();
 		});
 	</script>
+	<?php }else{?>
+	<script>
+		jQuery(document).ready(function() {			
+			// initiate layout and plugins
+			App.setPage("table_managed");
+			//App.setPage("sliders");
+			App.init();
+		});
+	</script>
+	<?php }?>
 	
  </body>
 <!-- END BODY -->
