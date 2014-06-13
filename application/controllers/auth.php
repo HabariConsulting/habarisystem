@@ -785,6 +785,7 @@ class Auth extends CI_Controller {
 		$data['page_title']='Habari Departments';
 		$data['page_sub_title']='View';
 		$this->load->view('includes/template',$data);
+	
 
 	}
 	function new_dep(){
@@ -793,6 +794,14 @@ class Auth extends CI_Controller {
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		$this->load->model('ion_auth_model');
@@ -805,6 +814,7 @@ class Auth extends CI_Controller {
 		$data['page_title']='Habari Departments';
 		$data['page_sub_title']='Add Department';
 		$this->load->view('includes/template',$data);
+	}
 
 	}
 	function save_dep(){
@@ -813,6 +823,14 @@ class Auth extends CI_Controller {
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		
@@ -839,20 +857,63 @@ class Auth extends CI_Controller {
 			$this->new_dep();
 		}
 	}
+	}
 	function activate_dep($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->activate_dep($id);
 			redirect('auth/departments');
 		}
+		}
 	function delete_dep($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->delete_dep($id);
 			redirect('auth/departments');
 		}
+		}
 	function inactivate_dep($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->inactivate_dep($id);
 			redirect('auth/departments');
+		}
 		}
 	function view_dep($id){
 		if (!$this->ion_auth->logged_in())
@@ -860,6 +921,14 @@ class Auth extends CI_Controller {
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		$this->load->model('ion_auth_model');
@@ -874,10 +943,25 @@ class Auth extends CI_Controller {
 			$data['page_sub_title']='view department';
 			$this->load->view('includes/template',$data);
 		}
+		}
 	function edit_dep($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->edit_dep($id);
 			redirect('auth/departments');
+		}
 		}
 	function view_clients(){
 		if (!$this->ion_auth->logged_in())
@@ -899,6 +983,7 @@ class Auth extends CI_Controller {
 		$data['page_title']='Habari Clients';
 		$data['page_sub_title']='Browse clients';
 		$this->load->view('includes/template',$data);
+	
 
 	}
 	function view_jobs(){
@@ -929,6 +1014,14 @@ class Auth extends CI_Controller {
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		$this->load->model('ion_auth_model');
@@ -941,6 +1034,7 @@ class Auth extends CI_Controller {
 		$data['page_title']='Habari Clients';
 		$data['page_sub_title']='Add New Client';
 		$this->load->view('includes/template',$data);
+	}
 
 	}
 	function new_job(){
@@ -949,6 +1043,14 @@ class Auth extends CI_Controller {
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		$this->load->model('ion_auth_model');
@@ -962,7 +1064,7 @@ class Auth extends CI_Controller {
 		$data['page_title']='Habari Jobs';
 		$data['page_sub_title']='Add New Job';
 		$this->load->view('includes/template',$data);
-
+}
 	}
 	function save_client(){
 		if (!$this->ion_auth->logged_in())
@@ -970,6 +1072,7 @@ class Auth extends CI_Controller {
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		
@@ -1047,26 +1150,75 @@ class Auth extends CI_Controller {
 		}
 	}**/
 function delete_client($id){
+	if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->delete_client($id);
 			redirect('auth/view_clients');
 		}
+		}
 	function activate_client($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->activate_client($id);
 			redirect('auth/view_clients');
 		}
+		}
 	function inactivate_client($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->inactivate_client($id);
 			redirect('auth/view_clients');
+		}
 		}
 	function view_client($id){
 		if (!$this->ion_auth->logged_in())
 		{
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
+		}elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
 		}
+		else
+		{
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		$this->load->model('ion_auth_model');
@@ -1081,10 +1233,25 @@ function delete_client($id){
 			$data['page_sub_title']='view';
 			$this->load->view('includes/template',$data);
 		}
+		}
 	function edit_client($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->edit_client($id);
 			redirect('auth/view_clients');
+		}
 		}
 	function view_tasks(){
 		if (!$this->ion_auth->logged_in())
@@ -1114,6 +1281,14 @@ function delete_client($id){
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		$this->load->model('ion_auth_model');
@@ -1128,6 +1303,7 @@ function delete_client($id){
 		$data['page_title']='Habari Tasks';
 		$data['page_sub_title']='Add a Task';
 		$this->load->view('includes/template',$data);
+	}
 
 	}
 	function save_task(){
@@ -1211,6 +1387,7 @@ function view_task($id){
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		$this->load->model('ion_auth_model');
@@ -1228,6 +1405,7 @@ function view_task($id){
  			$data['page_title']='Habari Consulting Task';
 			$data['page_sub_title']='view';
 			$this->load->view('includes/template',$data);
+		
 		}
 	function view_job($id){
 	if (!$this->ion_auth->logged_in())
@@ -1235,6 +1413,14 @@ function view_task($id){
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		$this->load->model('ion_auth_model');
@@ -1254,36 +1440,121 @@ function view_task($id){
 			$data['page_sub_title']='view';
 			$this->load->view('includes/template',$data);
 		}
+		}
 
 	function edit_task($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->edit_task($id);
 			redirect('auth/view_tasks');
 		}
+		}
 	function edit_job($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->edit_job($id);
 			redirect('auth/view_jobs');
 		}
+		}
 	function delete_task($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->delete_task($id);
 			redirect('auth/view_tasks');
 		}
+		}
 	function delete_job($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->delete_job($id);
 			redirect('auth/view_jobs');
 		}
+		}
 	function activate_task($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->activate_task($id);
 			redirect('auth/view_tasks');
 		}
+		}
 	function inactivate_task($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 			$this->load->model('ask_model');
 			$query = $this->ask_model->inactivate_task($id);
 			redirect('auth/view_tasks');
+		}
 		}
 	function create_sheet($user_id){
 		if (!$this->ion_auth->logged_in())
@@ -1365,6 +1636,14 @@ function view_task($id){
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));		
 		$this->load->model('ion_auth_model');
@@ -1379,6 +1658,7 @@ function view_task($id){
 		$data['page_title']='Temporary Design';
 		$data['page_sub_title']='assign yourself a department';
 		$this->load->view('includes/template',$data);
+	}
 
 	}
 	function edituser_dep($id){

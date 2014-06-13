@@ -34,6 +34,14 @@ class Quote extends CI_Controller {
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
 		$data= array();
 		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
 		$this->load->model('ion_auth_model');
@@ -46,6 +54,7 @@ class Quote extends CI_Controller {
 		$data['page_title']='Habari Quotes';
 		$data['page_sub_title']='Create Quote';
 		$this->load->view('includes/template',$data);
+	}
 
 	}
 	
@@ -98,7 +107,7 @@ class Quote extends CI_Controller {
 		
 	function save_quote(){
 		//CLIENT DETS'
-		if(($this->input->post('colorRadio'))=='red'){
+		/*if(($this->input->post('colorRadio'))=='red'){
 			$client_id = $this->input->post('selCSI');
 		}elseif(($this->input->post('colorRadio'))=='green'){
 			$client_id = $this->quote_model->save_quote_client();
@@ -136,7 +145,7 @@ class Quote extends CI_Controller {
 		
 		$job_id = $this->quote_model->save_quote_job($other_docs,$project_brief,$client_id);
 		//END
-	 	redirect('quote/job_two/'.$job_id);
+	 	redirect('quote/job_two/'.$job_id);*/
 	}
 	function job_two($job_id){
 		if (!$this->ion_auth->logged_in())
