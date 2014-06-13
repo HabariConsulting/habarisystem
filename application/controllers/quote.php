@@ -197,4 +197,6 @@ class Quote extends CI_Controller {
 		$data['page_sub_title']='New Quote';
 		$this->load->view('includes/template',$data);
 		}
+	
+
 }

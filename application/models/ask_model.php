@@ -17,6 +17,24 @@ function department_fetch(){
 	return $this->db->query("SELECT * FROM `departments` where is_deleted='0' ");
 
 }
+function send_emaill($y){
+	
+	return $this->db->query("SELECT * FROM `users` where active='1' and user_dep='$y' ");
+
+}
+function send_email($y){
+  $sql="SELECT * FROM `users` u inner join `tasks` t on u.`user_dep`=t.`assigned`  where u.`active`='1' and u.`user_dep`='$y' ";
+    
+    $query = $this->db->query($sql);
+    $result = array();
+    if (count($query->result()) > 0){
+    foreach ($query->result() as $row) {
+     $result[] = $row;
+    }
+   }
+   
+   return $result;
+}
 function client_fetch(){
 	return $this->db->query("SELECT * FROM `clients` where is_deleted='0' order by dated desc ");
 

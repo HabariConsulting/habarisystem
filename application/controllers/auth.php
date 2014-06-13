@@ -1325,7 +1325,7 @@ function delete_client($id){
                 $this->form_validation->set_rules('employee','Assigned to','required');
                 $this->form_validation->set_rules('deadline','Deadline','required');                              
         if ($this->form_validation->run() == TRUE)
-		{ 
+		{ 	$y=$this->input->post('employee');
 			 $data= array(
                 'title'=> $this->input->post('title'),
                 'brief'=> $this->input->post('editor1'),
@@ -1336,13 +1336,35 @@ function delete_client($id){
                 );
 			  $this->load->model('ask_model');
               $this->ask_model->add_task($data);
-
+              $this->send_email($y);
               $this->view_tasks();
 		}
 		else{
 			$this->create_task();
 		}
 	}
+	function send_email($y){
+		$this->load->model('ask_model');
+		$query= $this->ask_model->send_email($y);
+//echo $query['username'];// ['username'];
+foreach ($query as $row) { 
+	
+
+
+		$name=$row->username;;
+		$email=$row->email;;
+		$title=$row->title;;
+		$message=$row->brief;;
+
+		$to = $email;
+		$subject = "New Task Assigned";
+		$line="\n";
+		$message ="Name: ".$name.$line."Title: ".$title.$line."Message: ".$message;
+		$from = "timesheet@habariconsulting.com";
+		$headers = "From:" . $from;
+		mail($to,$subject,$message,$headers);
+
+		}	}
 	function save_job(){
 		if (!$this->ion_auth->logged_in())
 		{
