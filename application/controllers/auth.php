@@ -896,6 +896,25 @@ class Auth extends CI_Controller {
 			redirect('auth/departments');
 		}
 		}
+	function delete_employeerec($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
+			$this->load->model('ask_model');
+			$query = $this->ask_model->delete_employeerec($id);
+			redirect('auth/employees');
+		}
+		}
 	function inactivate_dep($id){
 		if (!$this->ion_auth->logged_in())
 		{
@@ -1297,7 +1316,7 @@ function delete_client($id){
             }
         $this->load->model('ask_model');
         $data['job_fetch']= $this->ask_model->job_fetch();
-        $data['employeedep_fetch']= $this->ask_model->employeedep_fetch();        
+        $data['employeedep_fetch']= $this->ask_model->employeedep_fetch();       
         $data['page_location']='Task';	
 		$data['content']='new_task';
 		$data['page_title']='Habari Tasks';
@@ -1650,13 +1669,18 @@ function view_task($id){
 		$this->load->view('includes/template',$data);
 
 	}
-	function employees($user_id){
+	function employees(){
 		if (!$this->ion_auth->logged_in())
 		{
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
-		
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
 		else
 		{
 		$data= array();
@@ -1667,19 +1691,75 @@ function view_task($id){
             }
         $this->load->model('ask_model');
         //$data['dep_user']= $this->ask_model->dep_user($user_id);
+        $data['department_fetch']= $this->ask_model->department_fetch();
+        $data['employeerec_fetch']= $this->ask_model->employeerec_fetch();       
+        $data['page_location']='Employees';	
+		$data['content']='employee_records';
+		$data['page_title']='Habari Consulting';
+		$data['page_sub_title']='employee records';
+		$this->load->view('includes/template',$data);
+	}
+
+	}
+	function employee_department($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
+		$data= array();
+		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));		
+		$this->load->model('ion_auth_model');
+            if($query=$this->ion_auth_model->data_info($identity)){
+                $data['info']=$query;
+            }
+        $this->load->model('ask_model');
+        //$data['dep_user']= $this->ask_model->dep_user($user_id);
+        $data['userdep_fetch']= $this->ask_model->userdep_fetch($id);
         $data['department_fetch']= $this->ask_model->department_fetch();       
         $data['page_location']='Employees';	
 		$data['content']='employee';
-		$data['page_title']='Temporary Design';
-		$data['page_sub_title']='assign yourself a department';
+		$data['page_title']='Assign User to Department';
+		$data['page_sub_title']='all employees must be assigned to a department';
 		$this->load->view('includes/template',$data);
 	}
+
+	}
+	function user_record($id){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		$data= array();
+		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
+		$this->load->model('ion_auth_model');
+            if($query=$this->ion_auth_model->data_info($identity)){
+                $data['info']=$query;
+            }//$this->session_manager();
+        $this->load->model('ask_model');
+        $data['userjobsum_report']= $this->ask_model->userjobsum_report($id);
+        $data['usertasksum_report']= $this->ask_model->usertasksum_report($id);
+        //$data['usersumtotal_report']= $this->ask_model->usersumtotal_report($id);
+        $data['page_location']='Employees';	
+		$data['content']='user_report';
+		$data['page_title']='User Report';
+		$data['page_sub_title']='view user tasks and jobs';
+		$this->load->view('includes/template',$data);
 
 	}
 	function edituser_dep($id){
 			$this->load->model('ask_model');
 			$query = $this->ask_model->edituser_dep($id);
-			redirect('auth/departments');
+			redirect('auth/employees');
 		}
 
 }

@@ -210,9 +210,9 @@
 					class="start active"
                     <?php }?>
                     >
-					<a href="<?php echo site_url();?>/auth/employees/<?php echo $this->session->userdata("user_id");?>">
+					<a href="<?php echo site_url();?>/auth/employees">
 					<i class="icon-bookmark-empty"></i> 
-					<span class="title">Employee Records</span>
+					<span class="title">Employee Dashboard</span>
                     <?php if ($page_location=='Employees'){?>
 					<span class="selected"></span>
                     <?php }?>

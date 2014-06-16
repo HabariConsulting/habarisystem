@@ -41,10 +41,10 @@
 									 foreach ($employeerec_fetch->result() as $row) { ?>
 										<tr class="odd gradeX">
 											<td><?php echo $num;?></td>
-											<td><a href="<?php echo site_url();?>/auth/edit_employeerec/<?php echo $row->id; ?>"><?php echo $row->first_name; ?> <?php echo $row->last_name; ?></a></td>
+											<td><a href="<?php echo site_url();?>/auth/user_record/<?php echo $row->id; ?>"><?php echo $row->first_name; ?> <?php echo $row->last_name; ?></a></td>
 											<td class="hidden-480"><a href="mailto:<?php echo $row->email; ?>"><?php echo $row->email; ?></a></td>
 											<td class="hidden-480"><?php echo $row->phone; ?></td>
-											<td class="center hidden-480"><?php echo $row->dep_name; ?></td>
+											<td class="center hidden-480"><?php echo $row->dep_name; ?> <a href="<?php echo base_url();?>index.php/auth/employee_department/<?php echo $row->id; ?>" class="btn mini green-stripe" style="float:right;">Edit</a></td>
 											<td ><a href="<?php echo base_url();?>index.php/auth/delete_employeerec/<?php echo $row->id; ?>" class="btn mini red-stripe">Archive</a></td>
 										</tr>
 										<?php $num++;}
