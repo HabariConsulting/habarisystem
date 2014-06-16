@@ -1656,12 +1656,7 @@ function view_task($id){
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
-		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
-		{
-			//redirect them to the home page because they must be an administrator to view this
-			$this->session->set_flashdata('message', 'You must be an admin to view this page');
-			redirect('auth/index');
-		}
+		
 		else
 		{
 		$data= array();
