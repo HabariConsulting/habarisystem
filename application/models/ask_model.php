@@ -17,13 +17,13 @@ function department_fetch(){
 	return $this->db->query("SELECT * FROM `departments` where is_deleted='0' ");
 
 }
-function send_emaill($y){
+function send_emaill($y, $id){
 	
-	return $this->db->query("SELECT * FROM `users` where active='1' and user_dep='$y' ");
+	return $this->db->query("SELECT * FROM `users` u inner join `departments` d on u.`user_dep`=d.`dep_id` inner join `tasks` t on d.`dep_id`=t.`assigned` where u.`active`='1' and t.`task_id`='$id' and u.`user_dep`='$y' ");
 
 }
-function send_email($y){
-  $sql="SELECT * FROM `users` u inner join `tasks` t on u.`user_dep`=t.`assigned`  where u.`active`='1' and u.`user_dep`='$y' ";
+function send_email($y, $id){
+  $sql="SELECT * FROM `users` u inner join `departments` d on u.`user_dep`=d.`dep_id` inner join `tasks` t on d.`dep_id`=t.`assigned`  where u.`active`='1' and t.`task_id`='$id' and u.`user_dep`='$y' ";
     
     $query = $this->db->query($sql);
     $result = array();
@@ -97,8 +97,17 @@ function count_dep(){
  function add_client($data){
         $this->db->insert('clients',$data);
     }
- function add_task($data){
+ function add_task(){
+ 	$data= array(
+                'title'=> $this->input->post('title'),
+                'brief'=> $this->input->post('editor1'),
+                'client'=> $this->input->post('selCSI'),
+                'assigned'=> $this->input->post('employee'),
+                'deadline'=> $this->input->post('deadline'),
+                'posted_by'=> $this->session->userdata($this->config->item('identity', 'ion_auth'))                
+                );
         $this->db->insert('tasks',$data);
+        return $this->db->insert_id();
     }
  function add_job($data){
         $this->db->insert('jobs',$data);

@@ -1326,26 +1326,21 @@ function delete_client($id){
                 $this->form_validation->set_rules('deadline','Deadline','required');                              
         if ($this->form_validation->run() == TRUE)
 		{ 	$y=$this->input->post('employee');
-			 $data= array(
-                'title'=> $this->input->post('title'),
-                'brief'=> $this->input->post('editor1'),
-                'client'=> $this->input->post('selCSI'),
-                'assigned'=> $this->input->post('employee'),
-                'deadline'=> $this->input->post('deadline'),
-                'posted_by'=> $this->session->userdata($this->config->item('identity', 'ion_auth'))                
-                );
+			 
 			  $this->load->model('ask_model');
-              $this->ask_model->add_task($data);
-              $this->send_email($y);
-              $this->view_tasks();
+              $id=$this->ask_model->add_task();
+              //echo $id; die();//$id = $this->db->insert_id();
+
+              $this->send_email($y, $id);
+              
 		}
 		else{
 			$this->create_task();
 		}
 	}
-	function send_email($y){
+	function send_email($y, $id){
 		$this->load->model('ask_model');
-		$query= $this->ask_model->send_email($y);
+		$query= $this->ask_model->send_email($y, $id);
 //echo $query['username'];// ['username'];
 foreach ($query as $row) { 
 	
@@ -1355,16 +1350,19 @@ foreach ($query as $row) {
 		$email=$row->email;;
 		$title=$row->title;;
 		$message=$row->brief;;
+		$deadline=$row->deadline;;
 
-		$to = $email;
+		$to = $email.",michelle@habariconsulting.com".",enrico@habariconsulting.com";
 		$subject = "New Task Assigned";
 		$line="\n";
-		$message ="Name: ".$name.$line."Title: ".$title.$line."Message: ".$message;
+		$message ="Name: ".$name.$line."Title: ".$title.$line."Brief: ".$message.$line."Deadline: ".$deadline.$line."Kindly keep to the deadlines. Do not reply to this email.";
 		$from = "timesheet@habariconsulting.com";
 		$headers = "From:" . $from;
 		mail($to,$subject,$message,$headers);
 
-		}	}
+		}
+		$this->view_tasks();	
+	}
 	function save_job(){
 		if (!$this->ion_auth->logged_in())
 		{
