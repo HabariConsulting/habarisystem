@@ -45,6 +45,7 @@
   <link href="<?php echo base_url();?>assets/css/style_responsive.css" rel="stylesheet" />
   <link href="<?php echo base_url();?>assets/css/style_default.css" rel="stylesheet" id="style_color" />
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/uniform/css/uniform.default.css" />
+  <link rel="shortcut icon" href="<?php echo base_url();?>assets/img/favicon.ico" />
   <!--<link rel="shortcut icon" href="<?php echo base_url();?>assets/img/favicon.ico" /> -->
 
 </head>

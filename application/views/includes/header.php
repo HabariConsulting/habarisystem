@@ -34,7 +34,7 @@
    <link rel="stylesheet" href="<?php echo base_url();?>assets/data-tables/DT_bootstrap.css" />
    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bootstrap-daterangepicker/daterangepicker.css" />
    <link href='http://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-   <!--<link rel="shortcut icon" href="<?php echo base_url();?>assets/img/favicon.ico" /> -->
+   <link rel="shortcut icon" href="<?php echo base_url();?>assets/img/favicon.ico" />
 
 </head>
 <!-- END HEAD -->
@@ -138,7 +138,7 @@
 					class="start active"
                     <?php }else{?>class="has-sub "<?php }?>>
 					<a href="javascript:;">
-					<i class="icon-user"></i> 
+					<i class="icon-reorder"></i> 
 					<span class="title">Quotes</span>
 					<span class="arrow "></span>
 					</a>
