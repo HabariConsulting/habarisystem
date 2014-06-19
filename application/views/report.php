@@ -2,7 +2,7 @@
 					<div class="row-fluid invoice-logo">
 						<div class="span6 invoice-logo-space"><img src="<?php echo base_url();?>assets/img/logo.png" alt="" /> </div>
 						<div class="span6">
-							<p>#<?php echo $jobsum_report['job_number'];?> | <?php $datestring = "%d/ %m/ %Y";
+							<p>#<?php echo $jobsum_report['client_code'];?>-<?php echo $jobsum_report['job_type'];?>-<?php echo $jobsum_report['job_id'];?> | <?php $datestring = "%d/ %m/ %Y";
 											$time = time();
 											echo mdate($datestring, $time);?> 
 								<span class="muted">Consectetuer adipiscing elit</span></p>

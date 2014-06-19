@@ -3,7 +3,7 @@
                   <!-- BEGIN EXTRAS PORTLET-->
                   <div class="portlet box blue">
                      <div class="portlet-title">
-                        <h4><i class="icon-reorder"></i><?php echo $job_fetch['name'];?> : <?php echo $job_fetch['job_number'];?></h4>
+                        <h4><i class="icon-reorder"></i><?php echo $job_fetch['name'];?> : <?php echo $job_fetch['client_code'];?>-<?php echo $job_fetch['job_type'];?>-<?php echo $job_fetch['job_id'];?></h4>
                         <div class="tools">
                            
                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -15,13 +15,7 @@
                         <!-- BEGIN FORM-->
                         <form action="<?php echo site_url();?>/auth/edit_job/<?php echo $job_fetch['job_id'];?>" class="form-horizontal" name="form" method="post" enctype="multipart/form-data">
                            
-                           <div class="control-group">
-                              <label class="control-label">Job Number:<span class="required">*</span></label>
-                              <div class="controls">
-                                 <input type="text" name="job_number" id="job_number" data-required="1" class="span6 m-wrap" value="<?php echo $job_fetch['job_number'];?>" />
-                                 
-                              </div>
-                           </div> 
+                           
                            <div class="control-group">
                               <label class="control-label">Client: <span class="required">*</span></label>
                               <div class="controls">

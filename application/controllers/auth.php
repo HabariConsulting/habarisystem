@@ -780,6 +780,7 @@ class Auth extends CI_Controller {
         $this->load->model('ask_model');
 		$data['department_fetch']= $this->ask_model->department_fetch();
 		$data['count_dep']= $this->ask_model->count_dep();
+		$data['count_staff']= $this->ask_model->count_staff();
         $data['page_location']='Departments';	
 		$data['content']='departments';
 		$data['page_title']='Habari Departments';
@@ -1397,7 +1398,7 @@ foreach ($query as $row) {
 
 		$this->load->library('form_validation');
                 
-                $this->form_validation->set_rules('job_number','Job Number','required');
+               
                 $this->form_validation->set_rules('selCSI','Client','required');
                 $this->form_validation->set_rules('selCSI2','Job Type','required');
                 $this->form_validation->set_rules('editor1','Description','required');

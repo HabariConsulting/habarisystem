@@ -26,11 +26,11 @@
                               <label class="control-label">Job: <span class="required">*</span></label>
                               <div class="controls">
                                  <select name="selCSI" data-placeholder="Select Client from Database" class="chosen-with-diselect span6" tabindex="-1" id="selCSI">
-                                    <option selected value="<?php echo $view_task['job_id'];?>"><?php echo $view_task['job_number'];?></option>
+                                    <option selected value="<?php echo $view_task['job_id'];?>"><?php echo $view_task['client_code'];?>-<?php echo $view_task['job_type'];?>-<?php echo $view_task['job_id'];?></option>
                                     <?php
                            
                             foreach ($job_fetch->result() as $row) { ?>
-                                    <option value="<?php echo $row->job_id; ?>"><?php echo $row->job_number; ?></option><?php }?>
+                                    <option value="<?php echo $row->job_id; ?>"><?php echo $row->client_code; ?>-<?php echo $row->job_type; ?>-<?php echo $row->job_id; ?></option><?php }?>
                                     
                                  </select>
                               </div>

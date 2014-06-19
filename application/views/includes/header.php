@@ -119,77 +119,109 @@
                     <?php }?>
 					</a>
 				</li>
-                 
-				<li 
+               <?php if ($this->ion_auth->is_admin()){?>
+               			<li 
                 
-                <?php if ($page_location=='Departments'){?>
-					class="start active"
-                    <?php }?>
-                    >
-					<a href="<?php echo site_url();?>/auth/departments">
-					<i class="icon-sitemap"></i> 
-					<span class="title">Departments</span>
-                    <?php if ($page_location=='Departments'){?>
-					<span class="selected"></span>
-                    <?php }?>
-					</a>
-				</li>
-				<li  <?php if ($page_location=='Quotes'){?>
+			                <?php if ($page_location=='Employees'){?>
+								class="start active"
+			                    <?php }?>
+			                    >
+								<a href="<?php echo site_url();?>/auth/employees">
+								<i class="icon-bookmark-empty"></i> 
+								<span class="title">Employee Dashboard</span>
+			                    <?php if ($page_location=='Employees'){?>
+								<span class="selected"></span>
+			                    <?php }?>
+								</a>
+						</li>
+						<li 
+                
+			                <?php if ($page_location=='Departments'){?>
+								class="start active"
+			                    <?php }?>
+			                    >
+								<a href="<?php echo site_url();?>/auth/departments">
+								<i class="icon-sitemap"></i> 
+								<span class="title">Departments</span>
+			                    <?php if ($page_location=='Departments'){?>
+								<span class="selected"></span>
+			                    <?php }?>
+								</a>
+						</li>
+						<li  <?php if ($page_location=='Quotes'){?>
+							class="start active"
+		                    <?php }else{?>class="has-sub "<?php }?>>
+							<a href="javascript:;">
+							<i class="icon-reorder"></i> 
+							<span class="title">Quotes</span>
+							<span class="arrow "></span>
+							</a>
+							<ul class="sub">
+								<li><a href="<?php echo site_url();?>/quote/new_quote">New Quote</a></li>
+								<li><a href="<?php echo site_url();?>/auth/view_jobs">View Quote</a></li>
+								 
+							</ul>					
+						</li>
+						<li  <?php if ($page_location=='Clients'){?>
+							class="start active"
+		                    <?php }else{?>class="has-sub "<?php }?>>
+							<a href="javascript:;">
+							<i class="icon-user"></i> 
+							<span class="title">Clients</span>
+							<span class="arrow "></span>
+							</a>
+							<ul class="sub">
+								<li><a href="<?php echo site_url();?>/auth/view_clients">Clients</a></li>
+								<li><a href="<?php echo site_url();?>/auth/add_client">Add Client</a></li>
+								 
+							</ul>					
+						</li>
+						<li  <?php if ($page_location=='Jobs'){?>
+							class="start active"
+		                    <?php }else{?>class="has-sub "<?php }?>>
+							<a href="javascript:;">
+							<i class="icon-table"></i> 
+							<span class="title">Jobs</span>
+							<span class="arrow "></span>
+							</a>
+							<ul class="sub">
+								<li><a href="<?php echo site_url();?>/auth/view_jobs">Current Jobs</a></li>
+								<li><a href="<?php echo site_url();?>/auth/new_job">New Job</a></li>
+								 
+							</ul>					
+						</li>
+						<li  <?php if ($page_location=='Task'){?>
+							class="start active"
+		                    <?php }else{?>class="has-sub "<?php }?>>
+							<a href="javascript:;">
+							<i class="icon-legal"></i> 
+							<span class="title">Tasks</span>
+							<span class="arrow "></span>
+							</a>
+							<ul class="sub">
+								<li><a href="<?php echo site_url();?>/auth/view_tasks">Tasks</a></li>
+								<li><a href="<?php echo site_url();?>/auth/create_task">New Task</a></li>
+								 
+							</ul>					
+						</li>
+						<li  <?php if ($page_location=='Timesheet'){?>
 					class="start active"
                     <?php }else{?>class="has-sub "<?php }?>>
 					<a href="javascript:;">
-					<i class="icon-reorder"></i> 
-					<span class="title">Quotes</span>
+					<i class="icon-dashboard"></i> 
+					<span class="title">Timesheet</span>
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub">
-						<li><a href="<?php echo site_url();?>/quote/new_quote">New Quote</a></li>
-						<li><a href="<?php echo site_url();?>/auth/view_jobs">View Quote</a></li>
+						<li><a href="<?php echo site_url();?>/auth/view_sheets">Timesheets</a></li>
+						<li><a href="<?php echo site_url();?>/auth/create_sheet/<?php echo $this->session->userdata("user_id");?>">Enter Timesheet</a></li>
 						 
 					</ul>					
 				</li>
-				<li  <?php if ($page_location=='Clients'){?>
-					class="start active"
-                    <?php }else{?>class="has-sub "<?php }?>>
-					<a href="javascript:;">
-					<i class="icon-user"></i> 
-					<span class="title">Clients</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub">
-						<li><a href="<?php echo site_url();?>/auth/view_clients">Clients</a></li>
-						<li><a href="<?php echo site_url();?>/auth/add_client">Add Client</a></li>
-						 
-					</ul>					
-				</li>
-				<li  <?php if ($page_location=='Jobs'){?>
-					class="start active"
-                    <?php }else{?>class="has-sub "<?php }?>>
-					<a href="javascript:;">
-					<i class="icon-table"></i> 
-					<span class="title">Jobs</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub">
-						<li><a href="<?php echo site_url();?>/auth/view_jobs">Current Jobs</a></li>
-						<li><a href="<?php echo site_url();?>/auth/new_job">New Job</a></li>
-						 
-					</ul>					
-				</li>
-				<li  <?php if ($page_location=='Task'){?>
-					class="start active"
-                    <?php }else{?>class="has-sub "<?php }?>>
-					<a href="javascript:;">
-					<i class="icon-legal"></i> 
-					<span class="title">Tasks</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub">
-						<li><a href="<?php echo site_url();?>/auth/view_tasks">Tasks</a></li>
-						<li><a href="<?php echo site_url();?>/auth/create_task">New Task</a></li>
-						 
-					</ul>					
-				</li>
+			
+				<?php } else{?> 
+			
+				
 				<li  <?php if ($page_location=='Timesheet'){?>
 					class="start active"
                     <?php }else{?>class="has-sub "<?php }?>>
@@ -204,20 +236,8 @@
 						 
 					</ul>					
 				</li>
-				<li 
-                
-                <?php if ($page_location=='Employees'){?>
-					class="start active"
-                    <?php }?>
-                    >
-					<a href="<?php echo site_url();?>/auth/employees">
-					<i class="icon-bookmark-empty"></i> 
-					<span class="title">Employee Dashboard</span>
-                    <?php if ($page_location=='Employees'){?>
-					<span class="selected"></span>
-                    <?php }?>
-					</a>
-				</li>
+				<?php }?> 
+				
                
 				 
                 

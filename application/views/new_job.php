@@ -15,13 +15,7 @@
                         <!-- BEGIN FORM-->
                         <form action="<?php echo site_url();?>/auth/save_job" class="form-horizontal" name="form" method="post" enctype="multipart/form-data">
                            
-                           <div class="control-group">
-                              <label class="control-label">Job Number:<span class="required">*</span></label>
-                              <div class="controls">
-                                 <input type="text" name="job_number" id="job_number" data-required="1" class="span6 m-wrap" />
-                                 
-                              </div>
-                           </div> 
+                           
                            <div class="control-group">
                               <label class="control-label">Client: <span class="required">*</span></label>
                               <div class="controls">

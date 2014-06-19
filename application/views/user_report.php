@@ -61,7 +61,7 @@
               									$string = $row->brief; 
               									$string = character_limiter($string, 50);
              								 ?>
-									<td class="hidden-480"><?php echo $row->job_number; ?></td>
+									<td class="hidden-480"><?php echo $row->client_code; ?>-<?php echo $row->job_type; ?>-<?php echo $row->job_id; ?></td>
 									<td class="hidden-480"><?php echo $row->hours; ?></td>
 									<td class="hidden-480"><?php echo $row->rate; ?></td>
 									<?php

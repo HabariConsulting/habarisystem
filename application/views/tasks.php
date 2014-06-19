@@ -43,7 +43,7 @@
 										<tr class="odd gradeX">
 											<td><?php echo $num;?></td>
 											<td><a href="<?php echo site_url();?>/auth/view_task/<?php echo $row->task_id; ?>"><?php echo $row->title; ?></a></td>
-											<td class="hidden-480"><?php echo $row->job_number; ?></a></td>
+											<td class="hidden-480"><?php echo $row->client_code; ?>-<?php echo $row->job_type; ?>-<?php echo $row->job_id; ?></a></td>
 											<td class="hidden-480"><?php echo $row->deadline; ?></td>
 											<td class="hidden-480"><?php echo $row->dep_name; ?></td>
 											<td class="center hidden-480"><?php if($row->is_active==1){?>

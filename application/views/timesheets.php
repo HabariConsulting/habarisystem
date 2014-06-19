@@ -27,7 +27,7 @@
 									 foreach ($jobsum_fetch->result() as $row) { ?>
 										<tr class="odd gradeX">
 											<td><?php echo $num;?></td>
-											<td><?php echo $row->job_number; ?></td>
+											<td><?php echo $row->client_code; ?>-<?php echo $row->job_type; ?>-<?php echo $row->job_id; ?></td>
 											<td class="hidden-480"><?php echo $row->hours;?></td>
 											<td><a href="<?php echo site_url();?>/quote/report/<?php echo $row->job_id; ?>"><span class="label label-success">Get Report</span></a></td>
 										</tr><?php $num++;}?>

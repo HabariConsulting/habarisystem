@@ -35,8 +35,8 @@
 										
 										<div class="span5" style="overflow:hidden;">
 											<div class="portfolio-info">
-												People
-												<span>187</span>
+												Staff
+												<span><?php echo $row->num; ?></span>
 											</div>
 											<!--<div class="portfolio-info">
 												Hours in past week
