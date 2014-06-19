@@ -29,9 +29,9 @@
 										<tr>
 											<th style="width:8px;"></th>
 											<th>Name</th>
+											<th class="hidden-480">Client Code</th>
 											<th class="hidden-480">Email</th>
-											<th class="hidden-480">Phone Number</th>
-											<th class="hidden-480">Status</th>
+											<th class="hidden-480">Phone Number</th>											
 											<th ></th>
 										</tr>
 									</thead>
@@ -42,13 +42,9 @@
 										<tr class="odd gradeX">
 											<td><?php echo $num;?></td>
 											<td><a href="<?php echo site_url();?>/auth/view_client/<?php echo $row->client_id; ?>"><?php echo $row->name; ?></a></td>
+											<td class="hidden-480"><?php echo $row->client_code; ?></td>
 											<td class="hidden-480"><a href="mailto:<?php echo $row->email; ?>"><?php echo $row->email; ?></a></td>
 											<td class="hidden-480"><?php echo $row->p_number; ?></td>
-											<td class="center hidden-480"><?php if($row->is_signed==1){?>
-												<a href="<?php echo site_url();?>/auth/inactivate_client/<?php echo $row->client_id; ?>"><span class="label label-success">Signed</span></a>
-												<?php } else{?>
-												<a href="<?php echo site_url();?>/auth/activate_client/<?php echo $row->client_id; ?>"><span class="label label-warning">Pending</span></a><?php }?>
-											</td>
 											<td ><a href="<?php echo base_url();?>index.php/auth/delete_client/<?php echo $row->client_id; ?>" class="btn mini red-stripe">Archive</a></td>
 										</tr>
 										<?php $num++;}

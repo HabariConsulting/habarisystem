@@ -21,6 +21,13 @@
                                  <input type="text" name="client_name" id="client_name" data-required="1" class="span6 m-wrap" value="<?php echo $client['name'];?>" />
                                  
                               </div>
+                           </div>
+                           <div class="control-group">
+                              <label class="control-label">Client Code:<span class="required">*</span></label>
+                              <div class="controls">
+                                 <input type="text" name="code" id="code" data-required="1" class="span6 m-wrap" value="<?php echo $client['client_code'];?>" />
+                                 
+                              </div>
                            </div> 
                            <div class="control-group">
                               <label class="control-label">E-mail Address:<span class="required">*</span></label>

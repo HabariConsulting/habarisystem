@@ -1100,6 +1100,7 @@ class Auth extends CI_Controller {
 		$this->load->library('form_validation');
                 
                 $this->form_validation->set_rules('client_name','Client Name','required');
+                $this->form_validation->set_rules('code','Client Code','required');
                 $this->form_validation->set_rules('email','Client Email','required');
                 $this->form_validation->set_rules('p_number','Phone Number','required');
                 $this->form_validation->set_rules('location','Location','required');
@@ -1111,6 +1112,7 @@ class Auth extends CI_Controller {
 		{ 
 			 $data= array(
                 'name'=> $this->input->post('client_name'),
+                'client_code'=> $this->input->post('code'),
                 'email'=> $this->input->post('email'),
                 'p_number'=> $this->input->post('p_number'),
                 'location'=> $this->input->post('location'),

@@ -295,7 +295,7 @@ function edituser_dep($id){
 }
 function edit_client($id){
 		$sql = "UPDATE clients		
-				SET name = '{$this->input->post('client_name')}', email = '{$this->input->post('email')}',
+				SET name = '{$this->input->post('client_name')}', client_code = '{$this->input->post('code')}', email = '{$this->input->post('email')}',
 				 p_number = '{$this->input->post('p_number')}', location = '{$this->input->post('location')}',
 				  address = '{$this->input->post('address')}', contact_person = '{$this->input->post('contact')}',
 				   person_number = '{$this->input->post('c_number')}'
