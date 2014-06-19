@@ -36,6 +36,21 @@
                               </div>
                            </div>
                            <div class="control-group">
+                              <label class="control-label">Job Type: <span class="required">*</span></label>
+                              <div class="controls">
+                                 <select name="selCSI2" data-placeholder="Select Job Type" class="chosen-with-diselect span6" tabindex="-1" id="selCSI2">
+                                    <option value=""></option>
+                                    
+                                    <option value="WB">Website Build</option>
+                                    <option value="PD">Production</option>
+                                    <option value="WD">Web Design</option>
+                                    <option value="OD">Online Design</option>
+                                    <option value="PD">Print Design</option>
+                                    
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="control-group">
                               <label class="control-label">Description:<span class="required">*</span></label>
                               <div class="controls">
                                  <textarea class="span12 ckeditor m-wrap" name="editor1" id="editor1" rows="6"></textarea>

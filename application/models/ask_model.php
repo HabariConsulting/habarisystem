@@ -317,7 +317,7 @@ function edit_task($id){
 function edit_job($id){
 		$sql = "UPDATE jobs		
 				SET job_number = '{$this->input->post('job_number')}', description = '{$this->input->post('editor1')}',
-				 client_id = '{$this->input->post('selCSI')}', timeline = '{$this->input->post('timeline')}',
+				 client_id = '{$this->input->post('selCSI')}', job_type = '{$this->input->post('selCSI2')}', timeline = '{$this->input->post('timeline')}',
 				  retainer = '{$this->input->post('optionsRadios1')}', category = '{$this->input->post('category')}',
 				   quote = '{$this->input->post('quote')}'
 				WHERE job_id=".$id;

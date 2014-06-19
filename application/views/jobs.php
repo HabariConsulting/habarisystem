@@ -41,7 +41,7 @@
 									 foreach ($job_fetch->result() as $row) { ?>
 										<tr class="odd gradeX">
 											<td><?php echo $num;?></td>
-											<td><a href="<?php echo site_url();?>/auth/view_job/<?php echo $row->job_id; ?>"><?php echo $row->job_number; ?></a></td>
+											<td><a href="<?php echo site_url();?>/auth/view_job/<?php echo $row->job_id; ?>"><?php echo $row->client_code; ?>-<?php echo $row->job_type; ?>-<?php echo $row->job_id; ?></a></td>
 											<td class="hidden-480"><a href="<?php echo site_url();?>/auth/view_client/<?php echo $row->client_id; ?>"><?php echo $row->name; ?></a></td>
 											<td class="hidden-480"><?php echo $row->timeline; ?></td>
 											<td class="center hidden-480"><?php echo $row->quote; ?></td>

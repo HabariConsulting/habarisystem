@@ -1399,6 +1399,7 @@ foreach ($query as $row) {
                 
                 $this->form_validation->set_rules('job_number','Job Number','required');
                 $this->form_validation->set_rules('selCSI','Client','required');
+                $this->form_validation->set_rules('selCSI2','Job Type','required');
                 $this->form_validation->set_rules('editor1','Description','required');
                 $this->form_validation->set_rules('timeline','Timeline','required');
                 $this->form_validation->set_rules('quote','Quote','required');                              
@@ -1408,6 +1409,7 @@ foreach ($query as $row) {
                 'job_number'=> $this->input->post('job_number'),
                 'description'=> $this->input->post('editor1'),
                 'client_id'=> $this->input->post('selCSI'),
+                'job_type'=> $this->input->post('selCSI2'),
                 'quote'=> $this->input->post('quote'),
                 'timeline'=> $this->input->post('timeline'),
                 'category'=> $this->input->post('category'),
