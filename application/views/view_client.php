@@ -16,28 +16,42 @@
                         <form action="<?php echo site_url();?>/auth/edit_client/<?php echo $client['client_id'];?>" class="form-horizontal" name="form" method="post" enctype="multipart/form-data">
                            
                            <div class="control-group">
-                              <label class="control-label">Client Name:<span class="required">*</span></label>
+                              <label class="control-label">Company Name:<span class="required">*</span></label>
                               <div class="controls">
                                  <input type="text" name="client_name" id="client_name" data-required="1" class="span6 m-wrap" value="<?php echo $client['name'];?>" />
                                  
                               </div>
                            </div>
                            <div class="control-group">
-                              <label class="control-label">Client Code:<span class="required">*</span></label>
+                              <label class="control-label">Company Code:<span class="required">*</span></label>
                               <div class="controls">
                                  <input type="text" name="code" id="code" data-required="1" class="span6 m-wrap" value="<?php echo $client['client_code'];?>" />
                                  
                               </div>
+                           </div>
+                           <div class="control-group">
+                                       <label class="control-label">Contract Rate<span class="required">*</span></label>
+                                       <div class="controls">
+                                          <label class="radio">
+                                          <input type="radio" name="optionsRadios1" value="0" <?php if($client['rate']==0){?>checked<?php }?>/>
+                                          Default
+                                          </label>
+                                          <label class="radio">
+                                          <input type="radio" name="optionsRadios1" value="1" <?php if($client['rate']==1){?>checked<?php }?> />
+                                          Client Rate
+                                          </label>  
+                                           
+                                       </div>
                            </div> 
                            <div class="control-group">
-                              <label class="control-label">E-mail Address:<span class="required">*</span></label>
+                              <label class="control-label">Company E-mail:<span class="required">*</span></label>
                               <div class="controls">
                                  <input type="text" name="email" id="email" data-required="1" class="span6 m-wrap" value="<?php echo $client['email'];?>" />
                                  
                               </div>
                            </div> 
                            <div class="control-group">
-                              <label class="control-label">Phone Number:<span class="required">*</span></label>
+                              <label class="control-label">Company Phone Number:<span class="required">*</span></label>
                               <div class="controls">
                                  <input type="text" name="p_number" id="p_number" data-required="1" class="span6 m-wrap" value="<?php echo $client['p_number'];?>" />
                                  
@@ -61,6 +75,13 @@
                               <label class="control-label">Contact Person:<span class="required">*</span></label>
                               <div class="controls">
                                  <input type="text" name="contact" id="contact" data-required="1" class="span6 m-wrap" value="<?php echo $client['contact_person'];?>" />
+                                 
+                              </div>
+                           </div> 
+                           <div class="control-group">
+                              <label class="control-label">Contact Person Position:<span class="required">*</span></label>
+                              <div class="controls">
+                                 <input type="text" name="position" id="position" data-required="1" class="span6 m-wrap" value="<?php echo $client['position'];?>" />
                                  
                               </div>
                            </div> 

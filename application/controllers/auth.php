@@ -839,9 +839,8 @@ class Auth extends CI_Controller {
 
 		$this->load->library('form_validation');
                 
-                $this->form_validation->set_rules('title','Question Title','required');
-                $this->form_validation->set_rules('rate','Question Rate','required');
-                $this->form_validation->set_rules('editor1','Question','required');               
+                $this->form_validation->set_rules('title','Title','required');
+                $this->form_validation->set_rules('rate','Rate','required');               
         if ($this->form_validation->run() == TRUE)
 		{ 
 			 $data= array(
@@ -1028,6 +1027,28 @@ class Auth extends CI_Controller {
 		$this->load->view('includes/template',$data);
 
 	}
+	function view_job_types(){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		$data= array();
+		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
+		$this->load->model('ion_auth_model');
+            if($query=$this->ion_auth_model->data_info($identity)){
+                $data['info']=$query;
+            }
+        $this->load->model('ask_model');
+		$data['job_type_fetch']= $this->ask_model->job_type_fetch();
+		//$data['count_dep']= $this->ask_model->count_dep();
+        $data['page_location']='Jobs';	
+		$data['content']='job_types';
+		$data['page_title']='Habari Job Types';
+		$data['page_sub_title']='Browse Jobs';
+		$this->load->view('includes/template',$data);
+
+	}
 	function add_client(){
 		if (!$this->ion_auth->logged_in())
 		{
@@ -1079,10 +1100,40 @@ class Auth extends CI_Controller {
             }
        	$this->load->model('ask_model');
         $data['client_fetch']= $this->ask_model->client_fetch();
+        $data['job_type_fetch']= $this->ask_model->job_type_fetch();
         $data['page_location']='Jobs';	
 		$data['content']='new_job';
 		$data['page_title']='Habari Jobs';
 		$data['page_sub_title']='Add New Job';
+		$this->load->view('includes/template',$data);
+}
+	}
+	function add_job_type(){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+		elseif (!$this->ion_auth->is_admin()) //remove this elseif if you want to enable this for non-admins
+		{
+			//redirect them to the home page because they must be an administrator to view this
+			$this->session->set_flashdata('message', 'You must be an admin to view this page');
+			redirect('auth/index');
+		}
+		else
+		{
+		$data= array();
+		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
+		$this->load->model('ion_auth_model');
+            if($query=$this->ion_auth_model->data_info($identity)){
+                $data['info']=$query;
+            }
+       	$this->load->model('ask_model');
+        
+        $data['page_location']='Jobs';	
+		$data['content']='new_job_type';
+		$data['page_title']='Habari Job Types';
+		$data['page_sub_title']='Add New Job Type';
 		$this->load->view('includes/template',$data);
 }
 	}
@@ -1114,11 +1165,13 @@ class Auth extends CI_Controller {
 			 $data= array(
                 'name'=> $this->input->post('client_name'),
                 'client_code'=> $this->input->post('code'),
+                'rate'=> $this->input->post('optionsRadios1'),
                 'email'=> $this->input->post('email'),
                 'p_number'=> $this->input->post('p_number'),
                 'location'=> $this->input->post('location'),
                 'address'=> $this->input->post('address'),
                 'contact_person'=> $this->input->post('contact'),
+                'position'=> $this->input->post('position'),
                 'person_number'=> $this->input->post('c_number')
                 );
 			  $this->load->model('ask_model');
@@ -1128,6 +1181,39 @@ class Auth extends CI_Controller {
 		}
 		else{
 			$this->add_client();
+		}
+	}
+	function save_type(){
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+
+		$data= array();
+		$identity= $this->session->userdata($this->config->item('identity', 'ion_auth'));
+		
+		$this->load->helper(array('form', 'url'));
+
+		$this->load->library('form_validation');
+                
+                $this->form_validation->set_rules('name','Job Type Name','required');
+                $this->form_validation->set_rules('editor1','Description','required');
+                
+                              
+        if ($this->form_validation->run() == TRUE)
+		{ 
+			 $data= array(
+                'job_type_name'=> $this->input->post('name'),
+                'job_type_desc'=> $this->input->post('editor1')
+                );
+			  $this->load->model('ask_model');
+              $this->ask_model->add_type($data);
+
+              $this->view_job_types();
+		}
+		else{
+			$this->add_job_type();
 		}
 	}
 	/**function save_client(){
@@ -1476,6 +1562,7 @@ function view_task($id){
 			$this->load->model('ask_model');
         $data['job_fetch']= $this->ask_model->get_job($id);
          $data['client_fetch']= $this->ask_model->client_fetch();
+         $data['job_type_fetch']= $this->ask_model->job_type_fetch();
         //$data['employeedep_fetch']= $this->ask_model->employeedep_fetch();	
         //$data['view_task'] = $this->ask_model->view_task($id);		
 			$data['page_location']='Jobs';	

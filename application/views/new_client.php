@@ -16,28 +16,42 @@
                         <form action="<?php echo site_url();?>/auth/save_client" class="form-horizontal" name="form" method="post" enctype="multipart/form-data">
                            
                            <div class="control-group">
-                              <label class="control-label">Client Name:<span class="required">*</span></label>
+                              <label class="control-label">Company Name:<span class="required">*</span></label>
                               <div class="controls">
                                  <input type="text" name="client_name" id="client_name" data-required="1" class="span6 m-wrap" />
                                  
                               </div>
                            </div> 
                            <div class="control-group">
-                              <label class="control-label">Client Code:<span class="required">*</span></label>
+                              <label class="control-label">Company Code:<span class="required">*</span></label>
                               <div class="controls">
                                  <input type="text" name="code" id="code" data-required="1" class="span6 m-wrap" />
                                  
                               </div>
                            </div> 
                            <div class="control-group">
-                              <label class="control-label">E-mail Address:<span class="required">*</span></label>
+                                       <label class="control-label">Contract Rate<span class="required">*</span></label>
+                                       <div class="controls">
+                                          <label class="radio">
+                                          <input type="radio" name="optionsRadios1" value="0" checked  />
+                                          Default
+                                          </label>
+                                          <label class="radio">
+                                          <input type="radio" name="optionsRadios1" value="1" checked />
+                                          Client Rate
+                                          </label>  
+                                           
+                                       </div>
+                           </div>
+                           <div class="control-group">
+                              <label class="control-label">Company E-mail:<span class="required">*</span></label>
                               <div class="controls">
                                  <input type="text" name="email" id="email" data-required="1" class="span6 m-wrap" />
                                  
                               </div>
                            </div> 
                            <div class="control-group">
-                              <label class="control-label">Phone Number:<span class="required">*</span></label>
+                              <label class="control-label">Company Phone Number:<span class="required">*</span></label>
                               <div class="controls">
                                  <input type="text" name="p_number" id="p_number" data-required="1" class="span6 m-wrap" />
                                  
@@ -61,6 +75,13 @@
                               <label class="control-label">Contact Person:<span class="required">*</span></label>
                               <div class="controls">
                                  <input type="text" name="contact" id="contact" data-required="1" class="span6 m-wrap" />
+                                 
+                              </div>
+                           </div> 
+                           <div class="control-group">
+                              <label class="control-label">Contact Person Position:<span class="required">*</span></label>
+                              <div class="controls">
+                                 <input type="text" name="position" id="position" data-required="1" class="span6 m-wrap" />
                                  
                               </div>
                            </div> 

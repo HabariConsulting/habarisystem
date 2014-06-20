@@ -36,6 +36,10 @@ function client_fetch(){
 	return $this->db->query("SELECT * FROM `clients` where is_deleted='0' order by dated desc ");
 
 }
+function job_type_fetch(){
+	return $this->db->query("SELECT * FROM `job_type` where deleted='0' order by job_type_id desc ");
+
+}
 
 function sheet_fetch(){
 	return $this->db->query("SELECT * FROM `sheets` s inner join `users` u on s.`posted_by`=u.`email` inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' order by s.`dated` desc ");
@@ -74,7 +78,7 @@ function view_task($id){
 	return mysql_fetch_assoc(mysql_query("SELECT * FROM `tasks` t inner join `departments` d on t.`assigned`=d.`dep_id` inner join `jobs` j on t.`client`=j.`job_id` inner join `clients` c on j.`client_id`=c.`client_id` where t.`task_id`='$id' order by t.`task_id` desc limit 1" ));
 }
 function jobsum_fetch(){
-	return $this->db->query("SELECT s.`task_id` , c.`client_code` as client_code, j.`job_type` as job_type, j.`job_id` as job_id, SUM(s.`hours`) as hours FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` inner join `clients` c on j.`client_id`=c.`client_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_number`");
+	return $this->db->query("SELECT s.`task_id` , c.`client_code` as client_code, j.`job_type` as job_type, j.`job_id` as job_id, SUM(s.`hours`) as hours FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` inner join `clients` c on j.`client_id`=c.`client_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_id`");
 	//return $this->db->query("SELECT * FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_id`");
 
 }
@@ -124,6 +128,9 @@ function department_fetch(){
     }
  function add_client($data){
         $this->db->insert('clients',$data);
+    }
+ function add_type($data){
+        $this->db->insert('job_type',$data);
     }
  function add_task(){
  	$data= array(
@@ -315,10 +322,10 @@ function edituser_dep($id){
 }
 function edit_client($id){
 		$sql = "UPDATE clients		
-				SET name = '{$this->input->post('client_name')}', client_code = '{$this->input->post('code')}', email = '{$this->input->post('email')}',
+				SET name = '{$this->input->post('client_name')}', client_code = '{$this->input->post('code')}', rate = '{$this->input->post('optionsRadios1')}', email = '{$this->input->post('email')}',
 				 p_number = '{$this->input->post('p_number')}', location = '{$this->input->post('location')}',
 				  address = '{$this->input->post('address')}', contact_person = '{$this->input->post('contact')}',
-				   person_number = '{$this->input->post('c_number')}'
+				   position = '{$this->input->post('position')}', person_number = '{$this->input->post('c_number')}'
 				WHERE client_id=".$id;
 		
 		$query = $this->db->query($sql);		
@@ -336,7 +343,7 @@ function edit_task($id){
 }
 function edit_job($id){
 		$sql = "UPDATE jobs		
-				SET job_number = '{$this->input->post('job_number')}', description = '{$this->input->post('editor1')}',
+				SET  description = '{$this->input->post('editor1')}',
 				 client_id = '{$this->input->post('selCSI')}', job_type = '{$this->input->post('selCSI2')}', timeline = '{$this->input->post('timeline')}',
 				  retainer = '{$this->input->post('optionsRadios1')}', category = '{$this->input->post('category')}',
 				   quote = '{$this->input->post('quote')}'
@@ -353,7 +360,7 @@ function view_client($id){
 }
 
 function get_job($id){
-	return mysql_fetch_assoc(mysql_query("SELECT * FROM `jobs` j inner join `clients` c on j.`client_id`=c.`client_id` where j.`job_id`='$id' order by j.`dated` desc limit 1"));
+	return mysql_fetch_assoc(mysql_query("SELECT * FROM `jobs` j left join `job_type` jt on j.`job_type`=jt.`job_type_id` inner join `clients` c on j.`client_id`=c.`client_id` where j.`job_id`='$id' order by j.`dated` desc limit 1"));
 
 }
 function jobsum_report($id){
@@ -372,7 +379,7 @@ function jobsum_report($id){
 										 FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id`
 										  inner join `jobs` j  on t.`client`=j.`job_id`
 										  inner join `clients` c on j.`client_id`=c.`client_id`
-										   where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' and j.`job_id`='$id' group by j.`job_number` desc limit 1"));
+										   where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' and j.`job_id`='$id' group by j.`job_id` desc limit 1"));
 	//return $this->db->query("SELECT * FROM `sheets` s inner join `tasks` t on s.`task_id`=t.`task_id` inner join `jobs` j  on t.`client`=j.`job_id` where s.`is_deleted`='0' and t.`is_deleted`='0' and j.`is_deleted`='0' group by j.`job_id`");
 
 }
