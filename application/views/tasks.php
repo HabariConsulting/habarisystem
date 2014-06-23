@@ -1,6 +1,9 @@
 <div class="row-fluid">
 					<div class="span12">
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+						<div class="pull-right">
+											<a href="<?php echo site_url();?>/auth/create_task" class="btn icn-only green">Add Task <i class="m-icon-swapright m-icon-white"></i></a> 									
+										</div><br/><br/>
 						<div class="portlet box light-grey">
 							<div class="portlet-title">
 								<h4><i class="icon-globe"></i>Tasks</h4>

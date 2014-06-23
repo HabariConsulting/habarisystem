@@ -186,6 +186,7 @@
 							</a>
 							<ul class="sub">
 								<li><a href="<?php echo site_url();?>/auth/view_jobs">Current Jobs</a></li>
+								<li><a href="<?php echo site_url();?>/auth/view_job_types">Job Types</a></li>
 								<li><a href="<?php echo site_url();?>/auth/new_job">New Job</a></li>
 								 
 							</ul>					

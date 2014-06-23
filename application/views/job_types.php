@@ -2,11 +2,11 @@
 					<div class="span12">
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 						<div class="pull-right">
-											<a href="<?php echo site_url();?>/auth/new_job" class="btn icn-only green">Add Job <i class="m-icon-swapright m-icon-white"></i></a> 									
+											<a href="<?php echo site_url();?>/auth/add_job_type" class="btn icn-only green">Add Job Type <i class="m-icon-swapright m-icon-white"></i></a> 									
 										</div><br/><br/>
 						<div class="portlet box light-grey">
 							<div class="portlet-title">
-								<h4><i class="icon-globe"></i>Current Jobs</h4>
+								<h4><i class="icon-globe"></i>Current Job Types</h4>
 								<div class="tools">
 									
 									<a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -31,24 +31,21 @@
 									<thead>
 										<tr>
 											<th style="width:8px;"></th>
-											<th>Job Number</th>
-											<th class="hidden-480">Client</th>
-											<th class="hidden-480">Timeline</th>
-											<th class="hidden-480">Quote</th>
+											<th>Job Type Name</th>
+											
 											<th ></th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php $num=1;
 									
-									 foreach ($job_fetch->result() as $row) { ?>
+									 foreach ($job_type_fetch->result() as $row) { ?>
 										<tr class="odd gradeX">
 											<td><?php echo $num;?></td>
-											<td><a href="<?php echo site_url();?>/auth/view_job/<?php echo $row->job_id; ?>"><?php echo $row->client_code; ?>-<?php echo $row->job_type; ?>-<?php echo $row->job_id; ?></a></td>
-											<td class="hidden-480"><a href="<?php echo site_url();?>/auth/view_client/<?php echo $row->client_id; ?>"><?php echo $row->name; ?></a></td>
-											<td class="hidden-480"><?php echo $row->timeline; ?></td>
-											<td class="center hidden-480"><?php echo $row->quote; ?></td>
-											<td ><a href="<?php echo base_url();?>index.php/auth/delete_job/<?php echo $row->job_id; ?>" class="btn mini red-stripe">Archive</a></td>
+											<td><a href="<?php echo site_url();?>/auth/view_job_type/<?php echo $row->job_type_id; ?>"><?php echo $row->job_type_name; ?></a></td>
+											
+											<td ><a href="<?php echo base_url();?>index.php/auth/delete_job_type/<?php echo $row->job_type_id; ?>" class="btn mini red-stripe">Archive</a>
+											</td>
 										</tr>
 										<?php $num++;}
 										  ?>

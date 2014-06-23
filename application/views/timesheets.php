@@ -1,4 +1,5 @@
 <div class="row-fluid">
+	
 					<div class="span6 responsive" data-tablet="span12 fix-offset" data-desktop="span6">
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 						<div class="portlet box grey">

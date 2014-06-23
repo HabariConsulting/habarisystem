@@ -1,6 +1,9 @@
  <div class="row-fluid">
                <div class="span12">
                   <!-- BEGIN EXTRAS PORTLET-->
+                  <div class="pull-right">
+                                 <a href="<?php echo site_url();?>/auth/add_job_type" class="btn icn-only green">Add Job Type <i class="m-icon-swapright m-icon-white"></i></a>                           
+                              </div><br/><br/>
                   <div class="portlet box blue">
                      <div class="portlet-title">
                         <h4><i class="icon-reorder"></i>New Job</h4>
@@ -34,12 +37,11 @@
                               <div class="controls">
                                  <select name="selCSI2" data-placeholder="Select Job Type" class="chosen-with-diselect span6" tabindex="-1" id="selCSI2">
                                     <option value=""></option>
-                                    
-                                    <option value="WB">Website Build</option>
-                                    <option value="PD">Production</option>
-                                    <option value="WD">Web Design</option>
-                                    <option value="OD">Online Design</option>
-                                    <option value="PD">Print Design</option>
+                                    <?php
+                           
+                            foreach ($job_type_fetch->result() as $row) { ?>
+                                    <option value="<?php echo $row->job_type_id; ?>"><?php echo $row->job_type_name; ?></option>
+                                    <?php }?>
                                     
                                  </select>
                               </div>

@@ -30,7 +30,7 @@
                               </div>
                            </div> 
                            <div class="control-group">
-                              <label class="control-label">Description:<span class="required">*</span></label>
+                              <label class="control-label">Description:</label>
                               <div class="controls">
                                  <textarea class="span12 ckeditor m-wrap" name="editor1" id="editor1" rows="6"><?php echo $department['description'];?></textarea>
                               </div>

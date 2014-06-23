@@ -1,6 +1,9 @@
 <div class="row-fluid">
 					<div class="span12">
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+						<div class="pull-right">
+											<a href="<?php echo site_url();?>/auth/add_client" class="btn icn-only green">Add Client <i class="m-icon-swapright m-icon-white"></i></a> 									
+										</div><br/><br/>
 						<div class="portlet box light-grey">
 							<div class="portlet-title">
 								<h4><i class="icon-globe"></i>Managed Clients</h4>
@@ -30,6 +33,7 @@
 											<th style="width:8px;"></th>
 											<th>Name</th>
 											<th class="hidden-480">Client Code</th>
+											<th class="hidden-480">Client Rate</th>
 											<th class="hidden-480">Email</th>
 											<th class="hidden-480">Phone Number</th>											
 											<th ></th>
@@ -43,6 +47,9 @@
 											<td><?php echo $num;?></td>
 											<td><a href="<?php echo site_url();?>/auth/view_client/<?php echo $row->client_id; ?>"><?php echo $row->name; ?></a></td>
 											<td class="hidden-480"><?php echo $row->client_code; ?></td>
+											<td class="hidden-480"><?php if($row->rate==0){?><span class="label label-success">Default</span><?php }?>
+													<?php if($row->rate==1){?><span class="label label-info">Client Rate</span><?php }?>
+											</td>
 											<td class="hidden-480"><a href="mailto:<?php echo $row->email; ?>"><?php echo $row->email; ?></a></td>
 											<td class="hidden-480"><?php echo $row->p_number; ?></td>
 											<td ><a href="<?php echo base_url();?>index.php/auth/delete_client/<?php echo $row->client_id; ?>" class="btn mini red-stripe">Archive</a></td>
